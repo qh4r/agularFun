@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="main.css">
 
     <script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular.min.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-messages.min.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
 </head>
 <body>
@@ -25,7 +27,21 @@
     </nav>
 </header>
 <div class="container">
-    <div ng-controller="mainController">
+    <div ng-controller="mainController as main">
+        <p>{{dupa}}</p>
+        <p>{{dupaFunction()}}</p>
+        <p>{{dupa + '  połączone siły  ' + dupaFunction()}}</p>
+        <div>
+            <!--form[name=testForm]>input[type=text ng-model=testField name=testField required minlength=5]+div[ng-messages=testForm.testField.$error]>div[ng-message=required]{Nie wprowadzono danych}+div[ng-message=minlength]{za krotko}-->
+            <form name="testForm">
+                <input type="text" ng-model="testField"
+                                         name="testField" required minlength="5">
+                <div ng-messages="testForm.testField.$error">
+                    <div class="alert alert-danger" ng-message="required">Nie wprowadzono danych</div>
+                    <div class="alert alert-danger" ng-message="minlength">za krotko</div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </body>
