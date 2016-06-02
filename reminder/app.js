@@ -30,6 +30,17 @@ reminderApp.controller('secondController', ['$scope', '$filter', function ($scop
         //Poniższe zadziałało by tak samo i nie wymagało by przekazywania argumentu
         //angular śledzi odświeżanie danych
         //return $filter('uppercase')($scope.ksywka);
-    }
+    };
+
+    //POWODUJE WYWOLANIE ODSWIEZENIA WIDOKU
+    //$scope.$apply(function(){
+    //
+    //})
+
+    //Tak mozna obserwowac se zmiane czegos co jest bindowane
+    $scope.$watch('ksywka', function(oldVal, newVal){
+        console.log(newVal, ' --> ', oldVal);
+    });
+
 }]);
 //var reminderApp=angular.module("reminderApp",["ngMessages","ngResource"]);reminderApp.controller("mainController",["$scope","$log","$resource",function(e,n,r){return n.info("dupa"),e.dupa="ads",e.dupaFunction=function(){return"funkcja dupa"},{scope:e}}]);
