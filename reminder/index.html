@@ -86,8 +86,8 @@
 
         <hr/>
 
-        <ul ng-repeat="t in tablica">
-            <li>{{t.name}} -- {{t.age}} {{t.age >= 30 ? '(ale stary)': ''}}</li>
+        <ul>
+            <li ng-repeat="t in tablica">{{t.name}} -- {{t.age}} {{t.age >= 30 ? '(ale stary)': ''}}</li>
         </ul>
 
         <button ng-click="logClick()">Click</button>
@@ -99,8 +99,8 @@
 
         <div ng-if="!!repos">
             <h2>Repozytoria</h2>
-            <ul ng-repeat="r in repos">
-                <li>{{r.name}}</li>
+            <ul>
+                <li ng-repeat="r in repos">{{r.name}}</li>
             </ul>
         </div>
         <div class="alert alert-danger" ng-if="!!error">
