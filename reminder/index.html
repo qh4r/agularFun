@@ -14,7 +14,9 @@
     <script type="text/javascript" src="https://code.angularjs.org/1.5.6/angular-resource.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
 </head>
-<body>
+
+<!--NG CLOAK SPRAWIA ZE ELEMENTY WYSWIETLANE SA DOPIERO GDY SA GOTOWE!!!!-->
+<body ng-cloak>
 <!--header>nav.navbar.navbar-default>div.container>.navbar-header>a.navbar-brand[href=/]{Angular}^ul.nav.navbar-nav.navbar-right>li>a.fa.fa-home[href=#]>i{Home}-->
 <header>
     <nav class="navbar navbar-default">
@@ -29,13 +31,17 @@
 <div class="container">
     <div ng-controller="mainController as main">
         <p>{{dupa}}</p>
+
         <p>{{dupaFunction()}}</p>
-        <p>{{dupa + '  połączone siły  ' + dupaFunction()}}</p>
+
+        <p>{{dupa + ' połączone siły ' + dupaFunction()}}</p>
+
         <div>
             <!--form[name=testForm]>input[type=text ng-model=testField name=testField required minlength=5]+div[ng-messages=testForm.testField.$error]>div[ng-message=required]{Nie wprowadzono danych}+div[ng-message=minlength]{za krotko}-->
             <form name="testForm">
                 <input type="text" ng-model="testField"
-                                         name="testField" required minlength="5">
+                       name="testField" required minlength="5">
+
                 <div ng-messages="testForm.testField.$error">
                     <div class="alert alert-danger" ng-message="required">Nie wprowadzono danych</div>
                     <div class="alert alert-danger" ng-message="minlength">za krotko</div>
@@ -46,12 +52,63 @@
     </div>
     <div ng-controller="secondController">
         <h2>{{hehe}}</h2>
+
         <div>
             <label>podaj ksywke</label>
             <input type="text" ng-model="ksywka">
         </div>
+
+
+        <!--IF USUWA Z DOM JESLI NIE JEST SPELNONY-->
+        <div class="alert alert-danger" ng-if="ksywka.length < requiredLength">
+
+            conajmniej 4 znaki
+
+        </div>
+        <!--HIDE USTAWIA ELEMENT JAKO HIDDEN GDY JEST SPELNIONY-->
+        <div class="alert alert-warning" ng-hide="ksywka.length !== requiredLength">
+
+            na krawedzi
+
+        </div>
+        <!--SHOW USTAWIA ELEMENT NA HIDDEN GDY  NIE JEST SPELNiONY-->
+        <div class="alert alert-success" ng-show="ksywka.length > requiredLength">
+
+            Teraz jest ok
+
+        </div>
+
+        <p>akutialna liczba znaków<span class="alert"
+                                        ng-class="{'alert-info': ksywka.length >= 4, 'alert-danger': ksywka.length < 4}">{{ksywka.length}}</span>
+        </p>
+
         <p>Twoja ksywka to: {{toUpper(ksywka)}}</p>
+
+        <hr/>
+
+        <ul ng-repeat="t in tablica">
+            <li>{{t.name}} -- {{t.age}} {{t.age >= 30 ? '(ale stary)': ''}}</li>
+        </ul>
+
+        <button ng-click="logClick()">Click</button>
     </div>
+
+    <div ng-controller="thirdController">
+        <input ng-focus="turnOffError()" type="text" ng-model="username">
+        <button ng-click="getRepos()" ng-disabled="!username.length">Pobierz</button>
+
+        <div ng-if="!!repos">
+            <h2>Repozytoria</h2>
+            <ul ng-repeat="r in repos">
+                <li>{{r.name}}</li>
+            </ul>
+        </div>
+        <div class="alert alert-danger" ng-if="!!error">
+            Error - {{error.status}} , {{error.statusText}}
+        </div>
+    </div>
+
 </div>
+
 </body>
 </html>

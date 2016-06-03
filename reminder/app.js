@@ -25,7 +25,7 @@ reminderApp.controller('secondController', ['$scope', '$filter', function ($scop
     $scope.hehe = 'hehehe'
     //inicjalizacja zmiennej uzywanej do bindingu jest niekonieczna
     //$scope.ksywka = '';
-    $scope.toUpper= function(input) {
+    $scope.toUpper = function (input) {
         return $filter('uppercase')(input);
         //Poniższe zadziałało by tak samo i nie wymagało by przekazywania argumentu
         //angular śledzi odświeżanie danych
@@ -38,9 +38,42 @@ reminderApp.controller('secondController', ['$scope', '$filter', function ($scop
     //})
 
     //Tak mozna obserwowac se zmiane czegos co jest bindowane
-    $scope.$watch('ksywka', function(oldVal, newVal){
+    $scope.$watch('ksywka', function (oldVal, newVal) {
         console.log(newVal, ' --> ', oldVal);
     });
 
+    //JESLNI NIE ZAINICJALIZUJESZ TO NIE BEDZIE POCZATKOWO SPRAWDZENIA DLUGOSCI
+    //WYKRZACZY SIE BO ksywka undefined
+    $scope.ksywka = '';
+    $scope.requiredLength = 4;
+
+    $scope.tablica = [
+        {name: 'Rafał', age: 25},
+        {name: 'Asia', age: 22},
+        {name: 'Szymon', age: 30}
+    ]
+
+    $scope.logClick = (function () {
+        var counter = 0;
+        return function () {
+            console.log('clicked! -> ' + ++counter)
+        }
+    })();
 }]);
 //var reminderApp=angular.module("reminderApp",["ngMessages","ngResource"]);reminderApp.controller("mainController",["$scope","$log","$resource",function(e,n,r){return n.info("dupa"),e.dupa="ads",e.dupaFunction=function(){return"funkcja dupa"},{scope:e}}]);
+
+
+reminderApp.controller('thirdController', ['$scope', '$http', function ($scope, $http) {
+    $scope.username = '';
+    $scope.getRepos = function () {
+        $http.get('https://api.github.com/users/' + $scope.username + '/repos')
+            .then(function (data) {
+                $scope.repos = data.data;
+            }).catch(function (err) {
+            $scope.error = err
+        });
+    };
+    $scope.turnOffError = function () {
+        delete $scope.error
+    }
+}]);
