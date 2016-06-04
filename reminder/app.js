@@ -1,5 +1,11 @@
 var reminderApp = angular.module('reminderApp', ['ngMessages', 'ngResource']);
 
+//EVENT NA ZMIANE HASHA
+window.addEventListener('hashchange', function(e){
+    console.log('hash changed', e);
+    //Ladne przyciecie do hasha
+    console.log(e.newURL.replace(/^[^#]*/,''));
+});
 
 // tablia zamiast samej funkcji podawana jest w celu minifikacji
 //Stringi nie sa minifikowane przez co angular wie ktora zmienna jest czym
@@ -76,4 +82,16 @@ reminderApp.controller('thirdController', ['$scope', '$http', function ($scope, 
     $scope.turnOffError = function () {
         delete $scope.error
     }
+}]);
+
+reminderApp.controller('outerController', ['$scope', function($scope){
+    $scope.tylkoOut = 'Zewnetrzna';
+    $scope.wspolna = 'Wspolna zewnatrz'
+    $scope.zmienionaOut = $scope.tylkoIn + ' zmodyfikowana'
+}]);
+
+reminderApp.controller('innerController', ['$scope', function($scope){
+    $scope.tylkoIn = 'Wewnętrzna';
+    $scope.wspolna = 'wspolna wewnatrz';
+    $scope.zmienionaIn = $scope.tylkoOut + ' zmodyfikowana'
 }]);

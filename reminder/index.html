@@ -29,6 +29,7 @@
     </nav>
 </header>
 <div class="container">
+
     <div ng-controller="mainController as main">
         <p>{{dupa}}</p>
 
@@ -93,6 +94,8 @@
         <button ng-click="logClick()">Click</button>
     </div>
 
+    <hr />
+
     <div ng-controller="thirdController">
         <input ng-focus="turnOffError()" type="text" ng-model="username">
         <button ng-click="getRepos()" ng-disabled="!username.length">Pobierz</button>
@@ -108,6 +111,26 @@
         </div>
     </div>
 
+    <hr />
+
+    <!--TO DAJE DOWOD ZE KOTROLER WEWNETRZY MA W $SCOPE DOSTEP DO ZMIENNYCH ZEWNETRZNEGO-->
+    <div ng-controller="outerController">
+        <h1>outside:</h1>
+        <p>TylkoOut: {{tylkoOut}}</p>
+        <p>Wspolna: {{wspolna}}</p>
+        <p>ZmienionaIn: {{zmienionaIn}}</p>
+        <p>TylkoIn: {{tylkoIn}}</p>
+        <p>zmienionaOut: {{zmienionaOut}}</p>
+        <div style="margin: 0 0 0 30px" ng-controller="innerController">
+            <h1>inside:</h1>
+            <p>TylkoOut: {{tylkoOut}}</p>
+            <p>Wspolna: {{wspolna}}</p>
+            <p>ZmienionaIn: {{zmienionaIn}}</p>
+            <p>TylkoIn: {{tylkoIn}}</p>
+            <p>zmienionaOut: {{zmienionaOut}}</p>
+        </div>
+
+    </div>
 </div>
 
 </body>
