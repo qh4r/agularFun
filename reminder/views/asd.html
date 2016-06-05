@@ -1,3 +1,12 @@
 <h1>ASD</h1>
 <p>{{test}}</p>
 <p>param: {{testText}}</p>
+<hr />
+
+Brzydkie  argumenty do dyrektywy:
+<for-show-directive ng-repeat="city in cities"></for-show-directive>
+<hr />
+Czyste wywołanie:
+<clean-for-show-directive ng-repeat="city in cities" city-function="getCity(theCity)" city-object="city">
+    <!--Wartosc podawana funkcji to tylko sygnal ze cos ma byc przyjmowane (i moze byc odwolywane wewnatrz)-->
+</clean-for-show-directive>

@@ -4,8 +4,12 @@
 <hr/>
 testy dyrektyw:
 <div class="list-group">
-    <div test-custom-directive></div> <!--DYREKTYWA JAKO ATRYBUT (A)-->
-    <test-custom-directive></test-custom-directive> <!--DYREKTYWA JAKO ELEMENT (E)-->
-    <div class="test-custom-directive"></div> <!--DYREKTYWA JAKO KLASA (C)-->
-    <!-- directive: test-custom-directive --> <!--DYREKTYWA JAKO KOMENTARZ (M)-->
+    <div test-custom-directive person-name="Rafał" person-description="fajny" person-id="1"></div> <!--DYREKTYWA JAKO ATRYBUT (A)-->
+    <test-custom-directive person-name="Rafał" person-description="fajny" person-id="1"></test-custom-directive> <!--DYREKTYWA JAKO ELEMENT (E)-->
+    <div class="test-custom-directive" person-name="Rafał" person-description="fajny" person-id="1"></div> <!--DYREKTYWA JAKO KLASA (C)-->
+    <!-- directive: test-custom-directive --> <!--DYREKTYWA JAKO KOMENTARZ (M) (nie wiem jak przekazac atrybuty-->
 </div>
+<hr />
+ładne:
+<test-custom-directive ng-repeat="person in people" person-name={{person.name}}
+                       person-description={{person.description}} person-id={{person.id}}> </test-custom-directive>
