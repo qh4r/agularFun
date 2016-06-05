@@ -22,6 +22,18 @@ routingApp.config(['$routeProvider', function ($routeProvider) {
             controller: 'dupaStubController'
         });
 }]);
+
+routingApp.directive('testCustomDirective', function(){
+
+    return {
+        restrict: 'AECM', //ELEMENT lub ATTRIBUTE CLASSNAME M=(KOMENTARZ) - tylko dla podanych bedzie wykrywana jako dyrektywa
+        // template: '<a href="#/dupa/1" class="list-group-item"><h4 class="list-group-item-heading">Rafał</h4>' +
+        // '<p class="list-group-item-text">test test</p></a>',
+        templateUrl: 'templates/testCustomDirective.html',
+        replace: true //REPLACE SPRAWIA  Z DOM ZNIKA TAG (KONTENER) Z NAZWA DYREKTYWY
+    }
+});
+
 routingApp.controller('routingMainController', ['$scope', '$log', '$location', 'testService',
     function ($scope, $log, $location, testService) {
         console.log('HOME');
@@ -56,3 +68,4 @@ routingApp.controller('dupaStubController', ['$scope', '$log', '$location', '$ro
            testService.testText = newValue;
         });
     }]);
+

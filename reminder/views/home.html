@@ -1,3 +1,11 @@
 <h1>HOME</h1>
 <p>param: {{testText}}</p>
 <button ng-click="changeValue()">Zmien wartość</button>
+<hr/>
+testy dyrektyw:
+<div class="list-group">
+    <div test-custom-directive></div> <!--DYREKTYWA JAKO ATRYBUT (A)-->
+    <test-custom-directive></test-custom-directive> <!--DYREKTYWA JAKO ELEMENT (E)-->
+    <div class="test-custom-directive"></div> <!--DYREKTYWA JAKO KLASA (C)-->
+    <!-- directive: test-custom-directive --> <!--DYREKTYWA JAKO KOMENTARZ (M)-->
+</div>
