@@ -23,6 +23,18 @@ routingApp.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
+routingApp.directive('containerDirective', function(){
+   return {
+       restrict: 'E',
+       templateUrl: 'templates/containerDirective.html',
+       replace: true,
+       transclude: true //Włącza transcluda
+       // i powoduje ze ng-transclude bedzie wypelnione zawartoscia wpisana
+       // tam gdzie była deklarowana dyrektywa
+       // DOMYSLNA WARTOSC TO FALSE
+   }
+});
+
 routingApp.directive('testCustomDirective', function(){
 
     return {
@@ -44,7 +56,16 @@ routingApp.directive('forShowDirective', function(){
    return {
        restrict: 'E',
        templateUrl: 'templates/forShowDirective.html',
-       replace: true
+       replace: true,
+       //ZAMIAST SCOPE MOZNA STWORZYC KONTROLLER DLA DYREKTYWY
+       // I WSTRZYKNAC W NIA SERWISY
+       controller: ['$scope', '$filter', function($scope, $filter){
+           //WYWOLA SIE DLA KAZDEJ INSTANCJI W RPZYPADKU ng-repeat na dyrektywie
+           console.log('z kontrolera!!');
+           //ZEWNETRZNY SCOPE NIE JEST NADPISYWANY TAK JAK W PRZYPADKU DEKLARACJI
+           //SCOPE W DYREKTYWIE
+           console.log($scope.city);
+       }]
    }
 });
 
@@ -53,10 +74,45 @@ routingApp.directive('cleanForShowDirective', function(){
         restrict: 'E',
         templateUrl: 'templates/cleanForShowDirective.html',
         replace: true,
+
         scope: {
             cityObject: '=', // = -- oznacza obiekt -- TO 2 STRONNY BINDING
             cityFunction: '&' // & -- oznacza funkcje
-        }
+        },
+        compile: function(elem, attrs) {
+            console.log('from compile');
+            console.log('elem ',elem,' attrs ', attrs);
+            //TUTAJ MOZNA EDYTOWAC teMPLATE DYREKTYWY
+            //DOPINAC EVENTY ITD
+            //RACZEJ SLABE WYJSCIE
+            elem[0].className = 'alert alert-danger'
+            return {
+                //TUTAJ ODBYWA SIE LINIKING
+                pre: function( scope, element, attrs){
+                  console.log('prelink ');
+                    console.log('scope ',scope,' element ', element,' attrs ', attrs);
+                },
+                //EVENTY DOPINAC DOPIERO W POST LINKU
+                post: function( scope, element, attrs){
+                    //Dostep do elementu w scopie
+                    if(scope.cityObject.name === 'Gliwice'){
+                        scope.cityObject.name = 'Gliwice sralice he he'
+                    }
+                    console.log('postlink ');
+                    console.log('scope ',scope,' element ', element,' attrs ', attrs);
+                },
+            }
+        },
+        //DZIAŁA DOKŁADNIE TAK JAK COMPILE POST LINK
+        //OBECNOSC COMPILE SPRAWIA ZE LINK SIE NIE ODPALA (PIERWSZENSTWO MA TEN Z COMPILE)
+        link: function( scope, element, attrs){
+            //Dostep do elementu w scopie
+            if(scope.cityObject.name === 'Palo alto'){
+                scope.cityObject.population = 1337
+            }
+            console.log('postlink ');
+            console.log('scope ',scope,' element ', element,' attrs ', attrs);
+        },
     }
 });
 
