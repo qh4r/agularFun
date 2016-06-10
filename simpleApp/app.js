@@ -10,4 +10,8 @@ simpleApp.config(['$routeProvider', function($routeProvider){
             templateUrl: 'views/forecast.html',
             controller: 'forecastController'
         })
+        .when('/forecast/:numberOfDays', {
+            templateUrl: 'views/forecast.html',
+            controller: 'forecastController'
+        })
 }]);
