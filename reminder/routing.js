@@ -50,7 +50,9 @@ routingApp.directive('testCustomDirective', function(){
         }
     }
 });
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//TEMPLATE MUSI MIEC 1 ELEMENT ROOT
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //NIE NADPISUJE SCOPE WIEC KORZYSTA ZE SCOPE CONTROLERA
 routingApp.directive('forShowDirective', function(){
    return {

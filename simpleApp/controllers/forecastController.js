@@ -10,17 +10,17 @@ simpleApp.controller('forecastController', ['$scope', '$resource', '$citySelecti
         q: $scope.selectedCity,
         cnt: $routeParams.numberOfDays,
         APPID: '98fad3940af1b54cf7defa8a88431867'
-    })
+    });
 
     console.log($scope.weatherResult);
 
     $scope.normalizeDate = function (timestamp) {
-        return new Date(+(('' + timestamp).length < 11 ? '' + timestamp + '000' : timestamp));
-    }
+        return new Date(+(('' + timestamp).length < 11 ? timestamp * 1000 : timestamp));
+    };
 
-    $scope.convertToCelcius = function (input) {
+    $scope.convertKelvinsToCelcius = function (input) {
         return (+input - 273.15).toFixed(2);
-    }
+    };
 
 }]);
 

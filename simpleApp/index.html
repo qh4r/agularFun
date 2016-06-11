@@ -16,13 +16,15 @@
     <script type="text/javascript" src="controllers/homeController.js"></script>
     <script type="text/javascript" src="controllers/forecastController.js"></script>
     <script type="text/javascript" src="services/citySelectionService.js"></script>
+    <script type="text/javascript" src="directives/dayLinkDirective.js"></script>
+    <script type="text/javascript" src="directives/temperatureInfoDirective.js"></script>
 </head>
 
 <body>
 <header>
     <nav class="navbar navbar-default">
         <div class="container">
-            <div class="navbar-header"><a href="/" class="navbar-brand">Weather</a></div>
+            <div class="navbar-header"><a href="#/" class="navbar-brand">Weather</a></div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/" class="fa fa-home"><i>Home</i></a></li>
                 <li><a href="#/forecast" class="fa fa-home"><i>Forecast</i></a></li>
@@ -31,7 +33,6 @@
     </nav>
 </header>
 <div class="container" ng-view>
-
 </div>
 </body>
 </html>

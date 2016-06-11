@@ -1,16 +1,11 @@
 <h1>{{selectedCity}}</h1>
 
-<div ng-repeat="day in weatherResult.list">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel-panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"> {{ normalizeDate(day.dt) | date: 'd MMM, y' }}</h3>
-                </div>
-                <div class="panel-body">
-                    Temperatura w dzień: {{ convertToCelcius(day.temp.day) }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<hr />
+
+Wyświetlane dni: <day-link-directive number-selected="3"></day-link-directive>
+| <day-link-directive number-selected="5"></day-link-directive>
+| <day-link-directive number-selected="7"></day-link-directive>
+
+
+<temperature-info-directive day="day" normalize-date="normalizeDate(time)" convert-to-celcius="convertKelvinsToCelcius(temp)" ng-repeat="day in weatherResult.list">
+</temperature-info-directive>

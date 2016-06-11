@@ -1,3 +1,9 @@
 html, body, input, select, textarea {
     font-size: 1.05em;
 }
+
+.number-selected {
+    font-weight: bold;
+    color: crimson;
+    text-decoration: underline;
+}
